@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
     // ACT
     private void FixedUpdate()
     {
-        Move();   
+        Move();
     }
 
     private void LateUpdate()
@@ -79,15 +79,34 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private bool IsGrounded ()
+    private bool IsGrounded()
     {
-        Ray ray = new Ray(transform.position, Vector3.down);
+        // boxCast 이용해서 리팩토링 해보기
 
-        if (Physics.Raycast(ray, 0.1f, groundLayer))
-            return true;
+        Ray[] rays = new Ray[4]
+        {
+            new Ray(transform.position + (transform.forward * 0.2f) + (transform.up * 0.01f), Vector3.down),
+            new Ray(transform.position + (-transform.forward * 0.2f) + (transform.up * 0.01f), Vector3.down),
+            new Ray(transform.position + (transform.right * 0.2f) + (transform.up * 0.01f), Vector3.down),
+            new Ray(transform.position + (-transform.right * 0.2f) +(transform.up * 0.01f), Vector3.down)
+        };
+
+        for (int i = 0; i < rays.Length; i++)
+        {
+            if (Physics.Raycast(rays[i], 0.1f, groundLayer))
+            {
+                return true;
+            }
+        }
 
         return false;
     }
+
+
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //}
 
 
     // LOOK

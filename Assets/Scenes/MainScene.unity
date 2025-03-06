@@ -222,10 +222,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  jumpPower: 3
+  jumpPower: 80
   groundLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 55
   cameraContainer: {fileID: 1288703386}
   minX: -85
   maxX: 85
@@ -538,7 +538,7 @@ GameObject:
   - component: {fileID: 2004197532}
   - component: {fileID: 2004197531}
   - component: {fileID: 2004197530}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: TempGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
