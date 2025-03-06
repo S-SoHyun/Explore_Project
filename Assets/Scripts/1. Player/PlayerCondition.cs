@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class PlayerCondition : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public UICondition uiCondition;
+
+    //Condition health { get { return uiCondition.health; } }
+
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        //if (health.curValue <= 0f)
+        //{
+        //    Die();
+        //}
+    }
+
+    public void Die()
+    {
+        // GameOverUI 생성 후 restart할 수 있게.
     }
 }
