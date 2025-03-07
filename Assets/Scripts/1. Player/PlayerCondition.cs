@@ -1,7 +1,13 @@
 using System;
 using UnityEngine;
 
-public class PlayerCondition : MonoBehaviour
+public interface IDamagable
+{
+    void TakePhysicalDamage(int damage);
+}
+
+
+public class PlayerCondition : MonoBehaviour, IDamagable
 {
     public UICondition uiCondition;
 
@@ -10,15 +16,17 @@ public class PlayerCondition : MonoBehaviour
 
     public event Action onTakeDamage;
 
-    private void Update()
+
+    void Update()
     {
         stamina.Add(stamina.passiveValue * Time.deltaTime);
 
-        if (health.curValue < 0f)
+        if (health.curValue <= 0f)
         {
             Die();
         }
     }
+
 
     public void Heal(float amount)
     {
@@ -27,6 +35,13 @@ public class PlayerCondition : MonoBehaviour
 
     public void Die()
     {
-        Debug.Log("플레이어가 죽었다.");
+        Debug.Log("die");
+        // GameOverUI 생성 후 restart할 수 있게.
+    }
+
+    public void TakePhysicalDamage(int damage)
+    {
+        health.Subtract(damage);
+        onTakeDamage?.Invoke();
     }
 }
