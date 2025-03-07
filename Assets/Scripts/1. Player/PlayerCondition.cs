@@ -1,29 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class PlayerCondition : MonoBehaviour
 {
     public UICondition uiCondition;
 
-    //Condition health { get { return uiCondition.health; } }
+    Condition health { get { return uiCondition.health; } }
+    Condition stamina { get { return uiCondition.stamina; } }
 
+    public event Action onTakeDamage;
 
-    void Start()
+    private void Update()
     {
-        
+        stamina.Add(stamina.passiveValue * Time.deltaTime);
+
+        if (health.curValue < 0f)
+        {
+            Die();
+        }
     }
 
-    void Update()
+    public void Heal(float amount)
     {
-        //if (health.curValue <= 0f)
-        //{
-        //    Die();
-        //}
+        health.Add(amount);
     }
 
     public void Die()
     {
-        // GameOverUI 생성 후 restart할 수 있게.
+        Debug.Log("플레이어가 죽었다.");
     }
 }
