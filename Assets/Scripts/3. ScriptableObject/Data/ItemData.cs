@@ -22,7 +22,6 @@ public class ItemData : ScriptableObject
     public string itemName;
     public string description;
     public ItemType type;
-    public Sprite icon;
     public GameObject prefab;
 
     [Header("Stacking")]
