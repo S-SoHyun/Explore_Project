@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62ff59477882dab45a2b26208e453bf1, type: 3}
   m_Name: Item_Bottle
   m_EditorClassIdentifier: 
-  itemName: "\uBCD1"
-  description: "\uB204\uAD70\uAC00 \uB9C8\uC2DC\uB2E4 \uB0A8\uAE34\uB4EF\uD558\uB2E4."
-  type: 0
+  itemName: "\uC218\uC0C1\uD55C \uC74C\uB8CC"
+  description: "\uC815\uCCB4\uBAA8\uB97C \uC561\uCCB4\uAC00 \uB4E4\uC5B4\uC788\uB2E4.
+    \uB9C8\uC154\uBCFC\uAE4C?"
+  type: 2
   prefab: {fileID: 6887259799325903213, guid: b0c285484fcc77b45bc5b4bc4349ffb0, type: 3}
   canStack: 0
   maxStackAmount: 0

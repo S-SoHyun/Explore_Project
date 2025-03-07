@@ -1179,6 +1179,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 41ccdf3c-0cd6-406e-8a01-626571092816
     m_ActionName: Player/Interaction[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3af07663-8da9-4c98-aaaf-a5881221f02e
+    m_ActionName: Player/Use[/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

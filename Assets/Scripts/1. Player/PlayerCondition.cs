@@ -3,7 +3,7 @@ using UnityEngine;
 
 public interface IDamagable
 {
-    void TakePhysicalDamage(int damage);
+    void TakePhysicalDamage(float damage);
 }
 
 
@@ -39,7 +39,7 @@ public class PlayerCondition : MonoBehaviour, IDamagable
         // GameOverUI 생성 후 restart할 수 있게.
     }
 
-    public void TakePhysicalDamage(int damage)
+    public void TakePhysicalDamage(float damage)
     {
         health.Subtract(damage);
         onTakeDamage?.Invoke();
