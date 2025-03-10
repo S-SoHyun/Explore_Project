@@ -33,8 +33,8 @@ public class Bottle : MonoBehaviour
         new RandomEffect(0, -1000f, 0f, 0f),   // 즉사
         new RandomEffect(1, 20f, 0f, 0f),     // 체력 +20
         new RandomEffect(2, -20f, 0f, 0f),    // 체력 -20
-        //new RandomEffect(3, 0f, 10f, 3f),     // 스피드 +10
-        //new RandomEffect(4, 0f, -10f, 5f),   // 스피드 -10
+        new RandomEffect(3, 0f, 3f, 3f),     // 스피드 +3
+        new RandomEffect(4, 0f, -4f, 5f),   // 스피드 -4
     };
 
     private int randomSelect;
@@ -81,32 +81,33 @@ public class Bottle : MonoBehaviour
                 condition.Heal(selectedEffect.Hp);
                 Debug.Log("즉사");
                 break;
-            case 1: // 체력+20
+            case 1: // 체력 +20
                 condition.Heal(selectedEffect.Hp);
                 Debug.Log("+20");
                 break;
-            case 2: // 체력-20
+            case 2: // 체력 -20
                 condition.Heal(selectedEffect.Hp);
                 Debug.Log("-20");
                 break;
-                //case 3: // 스피드+10
-
-                //    break;
-                //case 4: // 스피드-10
-
-                //    break;
+            case 3: // 스피드 +3
+                StartCoroutine(ApplySpeed(selectedEffect));
+                Debug.Log("스피드+3");
+                break;
+            case 4: // 스피드 -4
+                StartCoroutine(ApplySpeed(selectedEffect));
+                Debug.Log("스피드-4");
+                break;
         }
         //StartCoroutine(ShowEffectText(selectedEffect));
     }
 
 
-
     private IEnumerator ApplySpeed(RandomEffect selectedEffect)
     {
-
-
-
-        yield return null;
+        float speed = selectedEffect.Speed;
+        condition.SpeedUpDown(speed);
+        yield return new WaitForSeconds(5f);
+        condition.SpeedUpDown(-speed);
     }
 
     //private IEnumerator ShowEffectText(RandomEffect selectedEffect)    // 해당 효과를 text로 잠깐 보여주고 사라지게 하기

@@ -3,9 +3,9 @@ using UnityEngine;
 
 public enum ItemType
 {
-    Resource,
-    Equipable,
-    Consumable
+    Thing,      // 상자들
+    Equipable,  // 해머
+    Consumable  // 병
 }
 
 
@@ -24,7 +24,6 @@ public class ItemData : ScriptableObject
     public ItemType type;
     public GameObject prefab;
 
-    [Header("Stacking")]
-    public bool canStack;
-    public int maxStackAmount;
+    [Header("InventoryIn")]
+    public bool canInventoryIn;
 }

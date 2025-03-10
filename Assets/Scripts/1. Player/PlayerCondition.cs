@@ -10,12 +10,17 @@ public interface IDamagable
 public class PlayerCondition : MonoBehaviour, IDamagable
 {
     public UICondition uiCondition;
+    private PlayerController controller;
 
     Condition health { get { return uiCondition.health; } }
     Condition stamina { get { return uiCondition.stamina; } }
 
     public event Action onTakeDamage;
 
+    private void Start()
+    {
+        controller = GetComponent<PlayerController>();
+    }
 
     void Update()
     {
@@ -36,7 +41,12 @@ public class PlayerCondition : MonoBehaviour, IDamagable
     public void Die()
     {
         Debug.Log("die");
-        // GameOverUI 생성 후 restart할 수 있게.
+        UIManager.Instance.SetGameOver();
+    }
+
+    public void SpeedUpDown(float amount)
+    {
+        controller.moveSpeed += amount;
     }
 
     public void TakePhysicalDamage(float damage)
