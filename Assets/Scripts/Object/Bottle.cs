@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class RandomEffect
 {
-    private int number;    // 랜덤 번호 추출을 위함
+    private int number;    // 랜덤 번호 추출
     private float hp;
     private float speed;
     private float speedTime;
@@ -39,7 +38,7 @@ public class Bottle : MonoBehaviour
 
     private int randomSelect;
 
-    public TextMeshProUGUI effectText;
+    [SerializeField] private TextMeshProUGUI effectText;
 
     private PlayerCondition condition;
 
@@ -47,7 +46,7 @@ public class Bottle : MonoBehaviour
     void Start()
     {
         condition = CharacterManager.Instance.Player.condition;
-        effectText = GetComponent<TextMeshProUGUI>();
+        effectText = GetComponentInChildren<TextMeshProUGUI>(true);
     }
 
     public void InputActive()
@@ -91,7 +90,7 @@ public class Bottle : MonoBehaviour
                 Debug.Log("스피드-4");
                 break;
         }
-        //StartCoroutine(ShowEffectText(selectedEffect));
+        StartCoroutine(ShowEffectText(selectedEffect));
     }
 
 
@@ -103,19 +102,18 @@ public class Bottle : MonoBehaviour
         condition.SpeedUpDown(-speed);
     }
 
-    //private IEnumerator ShowEffectText(RandomEffect selectedEffect)    // 해당 효과를 text로 잠깐 보여주고 사라지게 하기
-    //{
-    //    effectText = transform.parent.find
+    private IEnumerator ShowEffectText(RandomEffect selectedEffect)    // 해당 효과를 text로 잠깐 보여주고 사라지게 하기
+    {
+        string statName = selectedEffect.Hp != 0 ? "HP " : "Speed ";
+        float statValue = selectedEffect.Hp != 0 ? selectedEffect.Hp: selectedEffect.Speed;
+        string plusMinus = selectedEffect.Hp > 0 || selectedEffect.Speed > 0 ?  "+" : "";
 
 
-    //    string statName = selectedEffect.Hp != 0 ? "HP " : "Speed ";
-    //    float statValue = selectedEffect.Hp != 0 ? selectedEffect.Hp : selectedEffect.Speed;
-    //    effectText.text = statName + statValue;
+        effectText.text = statName + plusMinus + statValue;
 
-    //    effectText.gameObject.SetActive(true);
-    //    yield return new WaitForSeconds(3f);
+        effectText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(3f);
 
-
-    //    effectText.gameObject.SetActive(false);
-    //}
+        effectText.gameObject.SetActive(false);
+    }
 }

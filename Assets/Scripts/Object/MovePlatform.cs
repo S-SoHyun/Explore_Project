@@ -50,7 +50,7 @@ public class MovePlatform : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.transform.parent = this.gameObject.transform;
+            collision.gameObject.transform.SetParent(this.transform);
         }
     }
 
@@ -58,7 +58,7 @@ public class MovePlatform : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.transform.parent = null;
+            collision.gameObject.transform.SetParent(null);
         }
     }
 }
