@@ -15,7 +15,7 @@ public class UIManager : Singleton<UIManager>
     GameStartUI gameStartUI;
     RuleUI ruleUI;
     GameOverUI gameOverUI;
-    private UIState curState;
+    UIState curState;
 
     private void Start()
     {
@@ -26,12 +26,6 @@ public class UIManager : Singleton<UIManager>
         gameOverUI = GetComponentInChildren<GameOverUI>(true);
         gameOverUI.Init(this);
 
-        //ChangeState(UIState.GameStart);
-        SetGameStart();
-    }
-
-    public void SetGameStart()
-    {
         ChangeState(UIState.GameStart);
     }
 

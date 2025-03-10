@@ -7,7 +7,6 @@ public class GameStartUI : BaseUI
 {
     [SerializeField] private Button startButton;
     [SerializeField] private Button exitButton;
-    [SerializeField] private GameObject ruleUI;
 
     public override void Init(UIManager uiManager)
     {
