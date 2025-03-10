@@ -9993,7 +9993,7 @@ GameObject:
   - component: {fileID: 832811838}
   - component: {fileID: 832811840}
   m_Layer: 5
-  m_Name: Stamina
+  m_Name: Speed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10070,9 +10070,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curValue: 0
-  maxValue: 100
-  startValue: 100
-  passiveValue: 5
+  maxValue: 10
+  startValue: 5
+  passiveValue: 0
   uiBar: {fileID: 2135573891}
 --- !u!1001 &843931013
 PrefabInstance:
@@ -14460,7 +14460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 1746758100}
-  stamina: {fileID: 832811840}
+  speed: {fileID: 832811840}
 --- !u!1001 &1167376799
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19457,7 +19457,7 @@ MonoBehaviour:
   curValue: 0
   maxValue: 100
   startValue: 100
-  passiveValue: 1
+  passiveValue: 0
   uiBar: {fileID: 1430374857}
 --- !u!1 &1751485222
 GameObject:
@@ -24603,7 +24603,7 @@ MonoBehaviour:
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0

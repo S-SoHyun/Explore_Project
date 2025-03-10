@@ -5,10 +5,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-
     [Header("Move")]
-    public float moveSpeed;
+    //public float moveSpeed;
     private Vector2 curMoveInput;
+    [SerializeField] private PlayerCondition speed;
+    //private Condition speed;
 
 
     [Header("Jump")]
@@ -30,11 +31,17 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        speed = GetComponentInParent<PlayerCondition>();
     }
 
     private void Start()
     {
         //Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void Update()
+    {
+        //moveSpeed = speed.curValue;    
     }
 
     // ACT
@@ -64,11 +71,12 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         Vector3 dir = transform.forward * curMoveInput.y + transform.right * curMoveInput.x;    // πÊ«‚
-        dir *= moveSpeed;
+        dir *= speed.uiCondition.speed.curValue;
         dir.y = rb.velocity.y;
 
         rb.velocity = dir;
     }
+
 
     // JUMP
     public void OnJumpInput(InputAction.CallbackContext context)

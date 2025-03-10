@@ -8,19 +8,16 @@ public class RandomEffect
     private int number;    // 랜덤 번호 추출
     private float hp;
     private float speed;
-    private float speedTime;
 
     public int Number { get; set; }
     public float Hp { get; set; }
     public float Speed { get; set; }
-    public float SpeedTime { get; set; }
 
-    public RandomEffect(int number, float hp, float speed, float speedTime)
+    public RandomEffect(int number, float hp, float speed)
     {
         Number = number;
         Hp = hp;
         Speed = speed;
-        SpeedTime = speedTime;
     }
 }
 
@@ -29,11 +26,11 @@ public class Bottle : MonoBehaviour
 {
     private List<RandomEffect> randomEffects = new List<RandomEffect>
     {
-        new RandomEffect(0, -1000f, 0f, 0f),   // 즉사
-        new RandomEffect(1, 20f, 0f, 0f),     // 체력 +20
-        new RandomEffect(2, -20f, 0f, 0f),    // 체력 -20
-        new RandomEffect(3, 0f, 3f, 3f),     // 스피드 +3
-        new RandomEffect(4, 0f, -4f, 5f),   // 스피드 -4
+        new RandomEffect(0, 1000f, 0f),   // 즉사
+        new RandomEffect(1, 20f, 0f),      // 체력 +20
+        new RandomEffect(2, 20f, 0f),     // 체력 -20
+        new RandomEffect(3, 0f, 3f),       // 스피드 +3
+        new RandomEffect(4, 0f, 4f),      // 스피드 -4
     };
 
     private int randomSelect;
@@ -58,7 +55,6 @@ public class Bottle : MonoBehaviour
         ActEffect(selectedEffect);
     }
 
-
     private RandomEffect Gacha()
     {
         randomSelect = Random.Range(0, randomEffects.Count);
@@ -70,6 +66,7 @@ public class Bottle : MonoBehaviour
         switch (randomSelect)
         {
             case 0: // 즉사
+                //condition.Deal(selectedEffect.Hp);
                 condition.Heal(selectedEffect.Hp);
                 Debug.Log("즉사");
                 break;
@@ -78,42 +75,39 @@ public class Bottle : MonoBehaviour
                 Debug.Log("+20");
                 break;
             case 2: // 체력 -20
-                condition.Heal(selectedEffect.Hp);
+                condition.Deal(selectedEffect.Hp);
                 Debug.Log("-20");
                 break;
             case 3: // 스피드 +3
-                StartCoroutine(ApplySpeed(selectedEffect));
+                StartCoroutine(condition.SpeedUp(selectedEffect.Speed));
                 Debug.Log("스피드+3");
                 break;
             case 4: // 스피드 -4
-                StartCoroutine(ApplySpeed(selectedEffect));
+                StartCoroutine(condition.SpeedDown(selectedEffect.Speed));
                 Debug.Log("스피드-4");
                 break;
         }
         StartCoroutine(ShowEffectText(selectedEffect));
     }
 
-
-    private IEnumerator ApplySpeed(RandomEffect selectedEffect)
-    {
-        float speed = selectedEffect.Speed;
-        condition.SpeedUpDown(speed);
-        yield return new WaitForSeconds(5f);
-        condition.SpeedUpDown(-speed);
-    }
-
     private IEnumerator ShowEffectText(RandomEffect selectedEffect)    // 해당 효과를 text로 잠깐 보여주고 사라지게 하기
     {
         string statName = selectedEffect.Hp != 0 ? "HP " : "Speed ";
-        float statValue = selectedEffect.Hp != 0 ? selectedEffect.Hp: selectedEffect.Speed;
-        string plusMinus = selectedEffect.Hp > 0 || selectedEffect.Speed > 0 ?  "+" : "";
-
+        float statValue = selectedEffect.Hp != 0 ? selectedEffect.Hp : selectedEffect.Speed;
+        string plusMinus = PlusMinus(selectedEffect);
 
         effectText.text = statName + plusMinus + statValue;
 
         effectText.gameObject.SetActive(true);
         yield return new WaitForSeconds(3f);
-
         effectText.gameObject.SetActive(false);
+    }
+
+    private string PlusMinus(RandomEffect selectedEffect)
+    {
+        if (selectedEffect.Number % 2 == 0)
+            return "-";
+        else
+            return "+";
     }
 }

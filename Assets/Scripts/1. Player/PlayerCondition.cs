@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public interface IDamagable
@@ -13,7 +14,7 @@ public class PlayerCondition : MonoBehaviour, IDamagable
     private PlayerController controller;
 
     Condition health { get { return uiCondition.health; } }
-    Condition stamina { get { return uiCondition.stamina; } }
+    Condition speed { get { return uiCondition.speed; } }
 
     public event Action onTakeDamage;
 
@@ -24,33 +25,44 @@ public class PlayerCondition : MonoBehaviour, IDamagable
 
     void Update()
     {
-        stamina.Add(stamina.passiveValue * Time.deltaTime);
-
         if (health.curValue <= 0f)
         {
             Die();
         }
     }
 
-
     public void Heal(float amount)
     {
         health.Add(amount);
     }
 
-    public void Die()
+    public void Deal(float amount)
     {
-        UIManager.Instance.SetGameOver();
+        health.Subtract(amount);
     }
 
-    public void SpeedUpDown(float amount)
+    public IEnumerator SpeedUp(float amount)
     {
-        controller.moveSpeed += amount;
+        speed.Add(amount);
+        yield return new WaitForSeconds(5f);
+        speed.Subtract(amount);
+    }
+
+    public IEnumerator SpeedDown(float amount)
+    {
+        speed.Subtract(amount);
+        yield return new WaitForSeconds(5f);
+        speed.Add(amount);
     }
 
     public void TakePhysicalDamage(float damage)
     {
         health.Subtract(damage);
         onTakeDamage?.Invoke();
+    }
+
+    public void Die()
+    {
+        UIManager.Instance.SetGameOver();
     }
 }
