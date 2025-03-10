@@ -50,22 +50,15 @@ public class Bottle : MonoBehaviour
         effectText = GetComponent<TextMeshProUGUI>();
     }
 
-    void Update()
+    public void InputActive()
     {
+        // 리스트에서 하나 뽑기
+        RandomEffect selectedEffect = Gacha();
 
+        // 뽑은 거 실행
+        ActEffect(selectedEffect);
     }
 
-    public void OnUseInput(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Started)      // 병에 대한 인풋이 들어오면
-        {
-            // 리스트에서 하나 뽑기
-            RandomEffect selectedEffect = Gacha();
-
-            // 뽑은 거 실행
-            ActEffect(selectedEffect);
-        }
-    }
 
     private RandomEffect Gacha()
     {

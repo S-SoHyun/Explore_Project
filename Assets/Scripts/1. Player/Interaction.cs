@@ -17,9 +17,13 @@ public class Interaction : MonoBehaviour
     public TextMeshProUGUI promptText;
     private Camera camera;
 
+    private Bottle bottle;
+    private ItemData data;
+
     void Start()
     {
         camera = Camera.main;
+        bottle = GetComponent<Bottle>();
     }
 
     void Update()
@@ -63,6 +67,18 @@ public class Interaction : MonoBehaviour
             curInteractGameObject = null;
             curInteractable = null;
             promptText.gameObject.SetActive(false);
+        }
+    }
+
+    public void OnUseInput(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started && !curInteractGameObject) return;
+
+        if (context.phase == InputActionPhase.Started && curInteractGameObject.TryGetComponent<Bottle>(out bottle))
+        {
+            {
+                bottle.InputActive();
+            }
         }
     }
 }

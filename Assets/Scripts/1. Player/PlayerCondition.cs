@@ -40,7 +40,6 @@ public class PlayerCondition : MonoBehaviour, IDamagable
 
     public void Die()
     {
-        Debug.Log("die");
         UIManager.Instance.SetGameOver();
     }
 
