@@ -6,10 +6,8 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [Header("Move")]
-    //public float moveSpeed;
     private Vector2 curMoveInput;
     [SerializeField] private PlayerCondition speed;
-    //private Condition speed;
 
 
     [Header("Jump")]
@@ -25,6 +23,8 @@ public class PlayerController : MonoBehaviour
     private float curXRot;
     public float lookSensitivity;
 
+    [HideInInspector]
+    public bool canLook = true;
 
     private Rigidbody rb;
 
@@ -39,10 +39,6 @@ public class PlayerController : MonoBehaviour
         //Cursor.lockState = CursorLockMode.Locked;
     }
 
-    private void Update()
-    {
-        //moveSpeed = speed.curValue;    
-    }
 
     // ACT
     private void FixedUpdate()
@@ -52,7 +48,8 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        Look();
+        if (canLook)
+            Look();
     }
 
     // MOVE
@@ -89,7 +86,7 @@ public class PlayerController : MonoBehaviour
 
     private bool IsGrounded()
     {
-        // boxCast 이용해서 리팩토링 해보기
+        // BoxCast?
 
         Ray[] rays = new Ray[4]
         {
@@ -111,12 +108,6 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.red;
-    //}
-
-
     // LOOK
     public void OnLookInput(InputAction.CallbackContext context)
     {
@@ -130,5 +121,11 @@ public class PlayerController : MonoBehaviour
         cameraContainer.localEulerAngles = new Vector3(-curXRot, 0, 0);
 
         transform.eulerAngles += new Vector3(0, mouseDelta.x * lookSensitivity, 0);
+    }
+
+    public void ToggleCursor(bool toggle)
+    {
+        Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
+        canLook = !toggle;
     }
 }

@@ -66,8 +66,7 @@ public class Bottle : MonoBehaviour
         switch (randomSelect)
         {
             case 0: // 즉사
-                //condition.Deal(selectedEffect.Hp);
-                condition.Heal(selectedEffect.Hp);
+                condition.Deal(selectedEffect.Hp);
                 Destroy(gameObject);
                 Debug.Log("즉사");
                 break;
