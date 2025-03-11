@@ -11,24 +11,16 @@ public interface IDamagable
 public class PlayerCondition : MonoBehaviour, IDamagable
 {
     public UICondition uiCondition;
-    private PlayerController controller;
 
     Condition health { get { return uiCondition.health; } }
     Condition speed { get { return uiCondition.speed; } }
 
     public event Action onTakeDamage;
 
-    private void Start()
-    {
-        controller = GetComponent<PlayerController>();
-    }
-
     void Update()
     {
         if (health.curValue <= 0f)
-        {
             Die();
-        }
     }
 
     public void Heal(float amount)

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class RandomEffect
+public class RandomEffect   // 랜덤 효과 생성
 {
-    private int number;    // 랜덤 번호 추출
+    private int number;     // 랜덤으로 고를 때 사용할 번호 추출
     private float hp;
     private float speed;
 
@@ -26,6 +26,7 @@ public class Bottle : MonoBehaviour
 {
     private List<RandomEffect> randomEffects = new List<RandomEffect>
     {
+        // number, hp, speed
         new RandomEffect(0, 1000f, 0f),   // 즉사
         new RandomEffect(1, 20f, 0f),      // 체력 +20
         new RandomEffect(2, 20f, 0f),     // 체력 -20
@@ -46,13 +47,10 @@ public class Bottle : MonoBehaviour
         effectText = GetComponentInChildren<TextMeshProUGUI>(true);
     }
 
-    public void InputActive()
+    public void InputActive()                           // input 들어오면
     {
-        // 리스트에서 하나 뽑기
-        RandomEffect selectedEffect = Gacha();
-
-        // 뽑은 거 실행
-        ActEffect(selectedEffect);
+        RandomEffect selectedEffect = Gacha();          // 랜덤 효과 뽑기
+        ActEffect(selectedEffect);                      // 뽑았으면 실행
     }
 
     private RandomEffect Gacha()
@@ -65,7 +63,7 @@ public class Bottle : MonoBehaviour
     {
         switch (randomSelect)
         {
-            case 0: // 즉사
+            case 0: // 체력 -1000
                 condition.Deal(selectedEffect.Hp);
                 Destroy(gameObject);
                 Debug.Log("즉사");
@@ -92,7 +90,7 @@ public class Bottle : MonoBehaviour
         StartCoroutine(ShowEffectText(selectedEffect));
     }
 
-    private IEnumerator ShowEffectText(RandomEffect selectedEffect)    // 해당 효과를 text로 잠깐 보여주고 사라지게 하기
+    private IEnumerator ShowEffectText(RandomEffect selectedEffect)    // 걸린 효과를 text로 잠깐 보여주기
     {
         string statName = selectedEffect.Hp != 0 ? "HP " : "Speed ";
         float statValue = selectedEffect.Hp != 0 ? selectedEffect.Hp : selectedEffect.Speed;

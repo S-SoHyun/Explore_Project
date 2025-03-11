@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -32,11 +30,6 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         speed = GetComponentInParent<PlayerCondition>();
-    }
-
-    private void Start()
-    {
-        //Cursor.lockState = CursorLockMode.Locked;
     }
 
 

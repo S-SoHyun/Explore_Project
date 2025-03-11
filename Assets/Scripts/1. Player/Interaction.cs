@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,14 +13,13 @@ public class Interaction : MonoBehaviour
     private IInteractable curInteractable;
 
     public TextMeshProUGUI promptText;
-    private Camera camera;
+    private Camera mainCamera;
 
     private Bottle bottle;
-    private ItemData data;
 
     void Start()
     {
-        camera = Camera.main;
+        mainCamera = Camera.main;
         bottle = GetComponent<Bottle>();
     }
 
@@ -32,7 +29,7 @@ public class Interaction : MonoBehaviour
         {
             lastCheckTime = Time.time;
 
-            Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+            Ray ray = mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, maxCheckDistance, layerMask))
@@ -59,7 +56,7 @@ public class Interaction : MonoBehaviour
         promptText.text = curInteractable.GetInteractPrompt();
     }
 
-    public void OnInteractInput(InputAction.CallbackContext context)
+    public void OnInteractInput(InputAction.CallbackContext context)    // E 입력 (나중에 장비 장착 구현하면.)
     {
         if (context.phase == InputActionPhase.Started && curInteractable != null)
         {
@@ -70,7 +67,7 @@ public class Interaction : MonoBehaviour
         }
     }
 
-    public void OnUseInput(InputAction.CallbackContext context)
+    public void OnUseInput(InputAction.CallbackContext context)     // R 입력 (아이템 사용)
     {
         if (context.phase == InputActionPhase.Started && !curInteractGameObject) return;
 

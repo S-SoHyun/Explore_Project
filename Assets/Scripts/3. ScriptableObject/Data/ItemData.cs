@@ -3,9 +3,9 @@ using UnityEngine;
 
 public enum ItemType
 {
-    Thing,      // 상자들
-    Equipable,  // 해머
-    Consumable  // 병
+    Thing,       // 물건
+    Equipable,   // 해머
+    Consumable   // 병
 }
 
 
@@ -25,5 +25,5 @@ public class ItemData : ScriptableObject
     public GameObject prefab;
 
     [Header("InventoryIn")]
-    public bool canInventoryIn;
+    public bool canInventoryIn;     // 나중에 장비 장착 구현하면.
 }

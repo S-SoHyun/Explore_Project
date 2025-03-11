@@ -7,13 +7,6 @@ public class MovePlatform : MonoBehaviour
     private bool isForward;
     private bool isBackward;
 
-    private Player player;
-
-    private void Awake()
-    {
-        player = CharacterManager.Instance.Player;
-    }
-
     void Start()
     {
         ForwardMove();
