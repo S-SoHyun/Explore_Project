@@ -68,14 +68,17 @@ public class Bottle : MonoBehaviour
             case 0: // 즉사
                 //condition.Deal(selectedEffect.Hp);
                 condition.Heal(selectedEffect.Hp);
+                Destroy(gameObject);
                 Debug.Log("즉사");
                 break;
             case 1: // 체력 +20
                 condition.Heal(selectedEffect.Hp);
+                Destroy(gameObject);
                 Debug.Log("+20");
                 break;
             case 2: // 체력 -20
                 condition.Deal(selectedEffect.Hp);
+                Destroy(gameObject);
                 Debug.Log("-20");
                 break;
             case 3: // 스피드 +3

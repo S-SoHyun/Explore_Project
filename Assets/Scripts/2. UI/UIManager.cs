@@ -6,7 +6,8 @@ public enum UIState
 {
     GameStart,
     Rule,
-    GameOver
+    GameOver,
+    Clear
 }
 
 
@@ -15,6 +16,7 @@ public class UIManager : Singleton<UIManager>
     GameStartUI gameStartUI;
     RuleUI ruleUI;
     GameOverUI gameOverUI;
+    ClearUI clearUI;
     UIState curState;
 
     private void Start()
@@ -25,7 +27,8 @@ public class UIManager : Singleton<UIManager>
         ruleUI.Init(this);
         gameOverUI = GetComponentInChildren<GameOverUI>(true);
         gameOverUI.Init(this);
-
+        clearUI = GetComponentInChildren<ClearUI>(true);
+        clearUI.Init(this);
         ChangeState(UIState.GameStart);
     }
 
@@ -39,11 +42,17 @@ public class UIManager : Singleton<UIManager>
         ChangeState(UIState.GameOver);
     }
 
+    public void SetClear()
+    {
+        ChangeState(UIState.Clear);
+    }
+
     public void ChangeState(UIState state)
     {
         curState = state;
         gameStartUI.SetActive(curState);
         ruleUI.SetActive(curState);
         gameOverUI.SetActive(curState);
+        clearUI.SetActive(curState);
     }
 }

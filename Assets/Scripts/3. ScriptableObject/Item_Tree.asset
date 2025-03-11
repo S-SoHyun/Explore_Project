@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Item_Tree
   m_EditorClassIdentifier: 
   itemName: "\uB098\uBB34"
-  description: "\uC0DD\uBA85\uB825\uC774 \uC5C6\uC5B4\uBCF4\uC774\uB294 \uB098\uBB34\uC774\uB2E4."
+  description: "\uC0DD\uBA85\uB825\uC774 \uC5C6\uB294 \uB098\uBB34\uC774\uB2E4."
   type: 0
-  prefab: {fileID: 0}
+  prefab: {fileID: 3107532662613102509, guid: 902d2b238df56c34da9381fce8440cc0, type: 3}
   canInventoryIn: 0

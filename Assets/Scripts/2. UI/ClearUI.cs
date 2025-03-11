@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameOverUI : BaseUI
+public class ClearUI : BaseUI
 {
     [SerializeField] private Button restartButton;
     [SerializeField] private Button exitButton;
@@ -28,6 +28,6 @@ public class GameOverUI : BaseUI
 
     protected override UIState GetUIState()
     {
-        return UIState.GameOver;
+        return UIState.Clear;
     }
 }
