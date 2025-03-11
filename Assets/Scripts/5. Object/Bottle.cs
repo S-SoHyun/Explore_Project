@@ -65,17 +65,14 @@ public class Bottle : MonoBehaviour
         {
             case 0: // 체력 -1000
                 condition.Deal(selectedEffect.Hp);
-                Destroy(gameObject);
                 Debug.Log("즉사");
                 break;
             case 1: // 체력 +20
                 condition.Heal(selectedEffect.Hp);
-                Destroy(gameObject);
                 Debug.Log("+20");
                 break;
             case 2: // 체력 -20
                 condition.Deal(selectedEffect.Hp);
-                Destroy(gameObject);
                 Debug.Log("-20");
                 break;
             case 3: // 스피드 +3
@@ -87,7 +84,9 @@ public class Bottle : MonoBehaviour
                 Debug.Log("스피드-4");
                 break;
         }
+        
         StartCoroutine(ShowEffectText(selectedEffect));
+        //Destroy(gameObject);      // 코루틴 실행 때문에 파괴가 안 됨. 다른 방법 강구
     }
 
     private IEnumerator ShowEffectText(RandomEffect selectedEffect)    // 걸린 효과를 text로 잠깐 보여주기
@@ -99,7 +98,7 @@ public class Bottle : MonoBehaviour
         effectText.text = statName + plusMinus + statValue;
 
         effectText.gameObject.SetActive(true);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         effectText.gameObject.SetActive(false);
     }
 
