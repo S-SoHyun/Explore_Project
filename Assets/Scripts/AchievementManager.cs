@@ -54,6 +54,8 @@ public class AchievementManager : MonoBehaviour
 
     void Start()
     {
+        DeleteData();
+
         string jsonPath = Application.persistentDataPath + "/AchievementData.txt";
         if (File.Exists(jsonPath))
         {
@@ -72,7 +74,6 @@ public class AchievementManager : MonoBehaviour
     private void AddAchievenments()
     {
         achievementData.Add(new Achievement("게임 스타트", "게임을 처음 시작했다.", false));
-        achievementData.Add(new Achievement("장애물", "장애물에 처음으로 부딪혔다.", false));
         achievementData.Add(new Achievement("500", "점수 500점을 돌파했다.", false));
     }
 
@@ -119,5 +120,13 @@ public class AchievementManager : MonoBehaviour
         achievementData = data.achievementData;
 
         Debug.Log("로드 완료.\n" + loadData);
+    }
+
+    void DeleteData()
+    {
+        string jsonData = Application.persistentDataPath + "/AchievementData.txt";
+
+        if (File.Exists(jsonData))
+            File.Delete(jsonData);
     }
 }
