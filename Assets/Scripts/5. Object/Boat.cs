@@ -7,6 +7,7 @@ public class Boat : MonoBehaviour
        if (collision.gameObject.CompareTag("Player"))
        {
             UIManager.Instance.SetClear();
+            //SoundManager.instance.PlaySFX(SFX.GAMECLEAR);
        }
     }
 }

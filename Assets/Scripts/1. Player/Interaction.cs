@@ -75,6 +75,7 @@ public class Interaction : MonoBehaviour
         {
             {
                 bottle.InputActive();
+                SoundManager.instance.PlaySFX(SFX.ITEM);
             }
         }
     }

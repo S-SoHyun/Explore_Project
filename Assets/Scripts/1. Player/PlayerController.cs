@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerCondition speed;
 
 
+
     [Header("Jump")]
     public float jumpPower;
     public LayerMask groundLayer;
@@ -74,6 +75,8 @@ public class PlayerController : MonoBehaviour
         if (context.phase == InputActionPhase.Started && IsGrounded())
         {
             rb.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
+            SoundManager.instance.PlaySFX(SFX.JUMP);
+            AchievementManager.instance.Achieve(1);
         }
     }
 
@@ -120,5 +123,18 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
         canLook = !toggle;
+    }
+
+    public void OnQInput(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            SoundManager.instance.PlaySFX(SFX.SLIDE);
+
+        }
+        if (context.phase == InputActionPhase.Canceled)
+        {
+            SoundManager.instance.StopSFX();
+        }
     }
 }
